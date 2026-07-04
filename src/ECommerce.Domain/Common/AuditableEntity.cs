@@ -7,5 +7,5 @@ public abstract class AuditableEntity : Entity
     public DateTimeOffset? LastModifiedDate { get; private set; }
     public string? LastModifiedBy { get; private set; }
 
-    protected AuditableEntity(Guid id) : base(id) {  }
+    protected AuditableEntity() { }
 }

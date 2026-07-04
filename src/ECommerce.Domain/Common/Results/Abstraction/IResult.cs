@@ -9,5 +9,5 @@ public interface IResult
 
 public interface IResult<TValue> : IResult
 {
-    TValue? Value { get;}
+    TValue? Value { get; }
 }

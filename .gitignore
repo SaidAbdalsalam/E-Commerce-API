@@ -483,3 +483,4 @@ $RECYCLE.BIN/
 .env
 *.env
 .env.local
+code.cs

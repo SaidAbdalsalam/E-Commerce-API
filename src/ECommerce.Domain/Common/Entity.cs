@@ -1,18 +1,17 @@
 namespace ECommerce.Domain.Common;
 
-
 public abstract class Entity
 {
-    public Guid Id { get;}
+    public Guid Id { get; private set; }
 
     private List<DomainEvent> _domainEvents = [];
     public IReadOnlyList<DomainEvent> DomainEvents => _domainEvents.AsReadOnly();
 
-    protected Entity() :this(Guid.NewGuid()) { }
-    protected Entity(Guid id)
+    protected Entity()
     {
-        Id = id == Guid.Empty ? Guid.NewGuid() : id;
+        Id = Guid.NewGuid();
     }
+
     public void AddDomainEvent(DomainEvent domainEvent)
     {
         _domainEvents.Add(domainEvent);
