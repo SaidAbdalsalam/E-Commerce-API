@@ -45,11 +45,11 @@ public sealed class CustomerAddress : AuditableEntity
     )
     {
         if (string.IsNullOrWhiteSpace(street))
-            return CustomerAddressError.StreetRequired;
+            return CustomerAddressErrors.StreetRequired;
         if (string.IsNullOrWhiteSpace(city))
-            return CustomerAddressError.CityRequired;
+            return CustomerAddressErrors.CityRequired;
         if (string.IsNullOrWhiteSpace(country))
-            return CustomerAddressError.CountryRequired;
+            return CustomerAddressErrors.CountryRequired;
 
         return new CustomerAddress(customerId, label, street, city, postalCode, country, isDefault);
     }
@@ -64,11 +64,11 @@ public sealed class CustomerAddress : AuditableEntity
     )
     {
         if (string.IsNullOrWhiteSpace(street))
-            return CustomerAddressError.StreetRequired;
+            return CustomerAddressErrors.StreetRequired;
         if (string.IsNullOrWhiteSpace(city))
-            return CustomerAddressError.CityRequired;
+            return CustomerAddressErrors.CityRequired;
         if (string.IsNullOrWhiteSpace(country))
-            return CustomerAddressError.CountryRequired;
+            return CustomerAddressErrors.CountryRequired;
 
         Label = string.IsNullOrWhiteSpace(label) ? "Address" : label.Trim();
         Street = street.Trim();

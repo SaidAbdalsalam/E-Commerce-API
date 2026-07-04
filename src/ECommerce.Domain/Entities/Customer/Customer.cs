@@ -37,19 +37,19 @@ public sealed class Customer : AuditableEntity
     {
         if (string.IsNullOrWhiteSpace(firstName))
         {
-            return CustomerError.FirstNameIsRequired;
+            return CustomerErrors.FirstNameIsRequired;
         }
         if (string.IsNullOrWhiteSpace(lastName))
         {
-            return CustomerError.LastNameIsRequired;
+            return CustomerErrors.LastNameIsRequired;
         }
         if (string.IsNullOrWhiteSpace(email))
         {
-            return CustomerError.EmailIsRequired;
+            return CustomerErrors.EmailIsRequired;
         }
         if (!CheckEmailFormat(email))
         {
-            return CustomerError.EmailInvalid;
+            return CustomerErrors.EmailInvalid;
         }
         var customer = new Customer(firstName.Trim(), lastName.Trim(), email.Trim(), isActive);
 
@@ -67,19 +67,19 @@ public sealed class Customer : AuditableEntity
     {
         if (string.IsNullOrWhiteSpace(firstName))
         {
-            return CustomerError.FirstNameIsRequired;
+            return CustomerErrors.FirstNameIsRequired;
         }
         if (string.IsNullOrWhiteSpace(lastName))
         {
-            return CustomerError.LastNameIsRequired;
+            return CustomerErrors.LastNameIsRequired;
         }
         if (string.IsNullOrWhiteSpace(email))
         {
-            return CustomerError.EmailIsRequired;
+            return CustomerErrors.EmailIsRequired;
         }
         if (!CheckEmailFormat(email))
         {
-            return CustomerError.EmailInvalid;
+            return CustomerErrors.EmailInvalid;
         }
 
         FirstName = firstName.Trim();
@@ -94,7 +94,7 @@ public sealed class Customer : AuditableEntity
     public Result<Updated> Deactivate()
     {
         if (!IsActive)
-            return CustomerError.AlreadyInactive;
+            return CustomerErrors.AlreadyInactive;
 
         IsActive = false;
         AddDomainEvent(new CustomerDeactivated(Id));
@@ -104,7 +104,7 @@ public sealed class Customer : AuditableEntity
     public Result<Updated> Activate()
     {
         if (IsActive)
-            return CustomerError.AlreadyActive;
+            return CustomerErrors.AlreadyActive;
 
         IsActive = true;
         AddDomainEvent(new CustomerActivated(Id));
@@ -134,7 +134,7 @@ public sealed class Customer : AuditableEntity
 
         if (_addresses.Any(a => a.IsEqualTo(city, street, postalCode)))
         {
-            return CustomerError.AddressIsAlreadyExists;
+            return CustomerErrors.AddressIsAlreadyExists;
         }
 
         var newAddress = addressResult.Value;
@@ -162,12 +162,12 @@ public sealed class Customer : AuditableEntity
         var existingAddress = _addresses.FirstOrDefault(a => a.Id == addressId);
         if (existingAddress is null)
         {
-            return CustomerError.AddressNotFound;
+            return CustomerErrors.AddressNotFound;
         }
 
         if (_addresses.Any(a => a.Id != addressId && a.IsEqualTo(city, street, postalCode)))
         {
-            return CustomerError.AddressIsAlreadyExists;
+            return CustomerErrors.AddressIsAlreadyExists;
         }
 
         bool wasDefault = existingAddress.IsDefault;
@@ -201,7 +201,7 @@ public sealed class Customer : AuditableEntity
         var targetAddress = _addresses.FirstOrDefault(a => a.Id == addressId);
         if (targetAddress is null)
         {
-            return CustomerError.AddressNotFound;
+            return CustomerErrors.AddressNotFound;
         }
 
         EnsureOnlyOneDefaultAddress(addressId);
@@ -214,7 +214,7 @@ public sealed class Customer : AuditableEntity
         var addressToRemove = _addresses.FirstOrDefault(a => a.Id == addressId);
         if (addressToRemove is null)
         {
-            return CustomerError.AddressNotFound;
+            return CustomerErrors.AddressNotFound;
         }
 
         _addresses.Remove(addressToRemove);

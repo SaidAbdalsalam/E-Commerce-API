@@ -2,7 +2,7 @@ using ECommerce.Domain.Common.Results;
 
 namespace ECommerce.Domain.Entities.Customer.Address;
 
-public static class CustomerAddressError
+public static class CustomerAddressErrors
 {
     public static Error StreetRequired =>
         Error.Validation("Address_Street_Required", "Street field is required.");

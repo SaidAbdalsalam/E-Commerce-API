@@ -2,7 +2,7 @@ using ECommerce.Domain.Common.Results;
 
 namespace ECommerce.Domain.Entities.Customer;
 
-public static class CustomerError
+public static class CustomerErrors
 {
     public static Error IdIsRequired =>
         Error.Validation("Customer_Id_Required", "Customer ID is required.");
